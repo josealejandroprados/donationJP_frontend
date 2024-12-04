@@ -1,1 +1,52 @@
-<p>donation works!</p>
+<section class="container-fluid mt-5">
+
+    <article class="row">
+
+        <div class="card col-11 col-md-10 col-lg-9 mx-auto">
+            <div class="card-body">
+
+                <h3 class="text-primary text-center">Lista de donaciones</h3>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>N°</th>
+                                <th>Nombre Donante</th>
+                                <th>Tipo Pago</th>
+                                <th>Monto</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let donat of donations; let i = index">
+                                <td>{{i}}</td>
+                                <td>{{donat.donorName}}</td>
+                                <td>{{donat.payment_method.id}}</td>
+                                <td>{{donat.amount}}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button class="btn btn-outline-danger btn-sm" (click)="deletePayment(donat._id)">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="donations.length<=0">
+                                <td colspan="5">
+                                    <div class="alert alert-danger text-center">
+                                        No hay donaciones registradas
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </article>
+</section>
+
+<app-modal-carga-inicial></app-modal-carga-inicial>
