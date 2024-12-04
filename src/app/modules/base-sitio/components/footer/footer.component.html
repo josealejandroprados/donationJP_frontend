@@ -1,1 +1,21 @@
-<p>footer works!</p>
+<footer class="bg-primary text-white p-4" style="min-height: 150px;">
+    <div class="mb-4 text-center">
+        <p>{{texto1}}</p>
+    </div>
+
+    <div class="mt-4 text-center">
+        <a routerLink="contact" class="btn btn-outline-light">
+            <i class="bi bi-envelope"></i>
+        </a>
+        <button class="btn btn-outline-light ms-4" (click)="openWhatsApp()">
+            <i class="bi bi-whatsapp"></i>
+        </button>
+
+        <a class="btn btn-outline-light ms-4" [href]="enlace_linkedIn" target="_blank">
+            <i class="bi bi-linkedin"></i>
+        </a>
+        <a [href]="enlace_github" class="btn btn-outline-light ms-4" target="_blank">
+            <i class="bi bi-github"></i>
+        </a>
+    </div>
+</footer>
