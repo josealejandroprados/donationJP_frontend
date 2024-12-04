@@ -1,0 +1,43 @@
+<section class="container-fluid mt-4 p-4 row">
+    <div class="card col-11 col-md-8 col-lg-6 mx-auto">
+        <div class="card-body">
+            <h2 class="text-center text-primary">
+                Donación segura
+            </h2>
+
+            <div class="text-center">
+                <img src="../../../../../assets/logos/mercadopago.png" class="img-fluid w-50" alt="img-mercado-pago">
+            </div>
+
+            <form [formGroup]="formDonacion" (ngSubmit)="enviarDonacion()">
+
+                <div class="mb-3">
+                    <label for="amount" class="form-label">
+                        Monto (ARS)
+                    </label>
+                    <input type="number" formControlName="amount" class="form-control" name="amount" id="amount" placeholder="Ingrese el monto que desea donar">
+                    
+                    <div class="alert alert-danger mt-2" [hidden]="amount.valid || (amount.pristine && amount.untouched)">
+                        <span *ngIf="amount.errors?.['required']">
+                            Es obligatorio ingresar el monto
+                        </span>
+                        <span *ngIf="amount.errors?.['min']">
+                            El monto debe ser mayor a 1
+                        </span>
+                    </div>
+                </div>
+
+                <div class="mb-3 mt-4 d-grid gap-2">
+                    <button 
+                        class="btn btn-outline-primary"
+                        type="submit"
+                        id="enviar">
+                        Enviar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<app-modal-carga-inicial></app-modal-carga-inicial>
