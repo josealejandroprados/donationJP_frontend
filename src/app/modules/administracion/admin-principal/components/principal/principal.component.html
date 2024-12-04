@@ -1,1 +1,42 @@
-<p>principal works!</p>
+<header class="bg-indigo mb-0">
+    <div class="d-flex flex-row" style="height: 90px;">
+        <h2 class="text-white mx-auto mt-auto mb-auto">
+            Admin Donations JP
+        </h2>
+        <div class="dropdown me-4 mt-auto mb-auto">
+            <a class="dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle h3"></i>
+            </a>
+            <ul class="dropdown-menu p-4" style="width: 300px;" data-bs-theme="light">
+                <li class="h4 text-primary">
+                    Bienvenido <i class="bi bi-emoji-laughing"></i>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <strong class="ms-2">User: </strong><i class="text-primary">{{getUser()}}</i>
+                </li>
+                <li>
+                    <strong class="ms-2">Access: </strong><i class="text-indigo">{{getRol()}}</i>
+                </li>
+                <br>
+                <li>
+                    <button class="btn btn-outline-primary d-flex ms-auto me-4 mb-2" type="button" (click)="logout()">
+                      Cerrar Sesión
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<main class="container-fluid">
+    <section class="row" style="min-height: 600px;">
+        <!-- menu lateral -->
+        <section class="col-3 col-md-2 col-lg-2 bg-dark">
+            <app-nav-lateral></app-nav-lateral>
+        </section>
+        <section class="col-9 col-md-10 col-lg-10">
+            <router-outlet></router-outlet>
+        </section>
+    </section>
+</main>
