@@ -14,4 +14,16 @@ export class DonationService {
   createDonation(donationData:any){
     return this.http.post<any>(`${this.baseUrl}/create-order`,donationData);
   }
+  
+  getDonations(){
+    return this.http.get<any>(`${this.baseUrl}/payments`);
+  }
+
+  getDonation(id:string){
+    return this.http.get<any>(`${this.baseUrl}/payment/${id}`);
+  }
+
+  deletePayment(id:string){
+    return this.http.delete<any>(`${this.baseUrl}/deletepayment/${id}`);
+  }
 }
