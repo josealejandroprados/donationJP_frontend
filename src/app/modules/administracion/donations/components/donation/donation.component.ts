@@ -66,7 +66,6 @@ export class DonationComponent implements OnInit, AfterViewInit{
       response => {
         if(response.message=='exito'){
           this.donations = response.donations;
-          console.log(this.donations);
         }
         else{
           console.log('error al obtener las donaciones')
