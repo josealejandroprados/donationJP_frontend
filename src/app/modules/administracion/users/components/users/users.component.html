@@ -1,1 +1,57 @@
-<p>users works!</p>
+<section class="container-fluid mt-5">
+
+    <article class="row">
+
+        <div class="card col-11 col-md-10 col-lg-9 mx-auto">
+            <div class="card-body">
+
+                <h3 class="text-primary text-center mb-4">Lista de Usuarios</h3>
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let user of users">
+                                <td>{{user.nombre + ' ' + user.apellido}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.rol}}</td>
+                                <td>
+                                    <div class="text-center mb-4 mt-3">
+                                        <div class="btn-group btn-group-sm">
+                                            <button class="btn btn-outline-primary">
+                                                <i class="bi bi-pen"></i>
+                                            </button>
+                                            <button class="btn btn-outline-danger" (click)="deleteUser(user)">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+                                            <button class="btn btn-outline-success">
+                                                <i class="bi bi-key"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+
+    </article>
+
+</section>
+
+<app-modal-carga-inicial></app-modal-carga-inicial>
+
+<app-modal-accion [modalAccion]="modalDeleteUser"></app-modal-accion>

@@ -29,26 +29,26 @@ export class AuthService {
     return this.http.get<any>(`${this.baseUrl}/users`);
   }
 
-  deleteUser(id:number){
-    return this.http.delete<any>(`${this.baseUrl}/deleteUser/${id}`);
+  deleteUser(id:string){
+    return this.http.delete<any>(`${this.baseUrl}/deleteuser/${id}`);
   }
 
   getUser(id:number){
-    return this.http.get<any>(`${this.baseUrl}/getUser/${id}`);
+    return this.http.get<any>(`${this.baseUrl}/getuser/${id}`);
   }
 
   updateUser(id:number, user:any){
-    return this.http.put<any>(`${this.baseUrl}/updateUser/${id}`,user)
+    return this.http.put<any>(`${this.baseUrl}/updateuser/${id}`,user)
   }
 
   EmailAvailable(email:string){
-    return this.http.get<any>(`${this.baseUrl}/emailAvailable/${email}`).pipe(
+    return this.http.get<any>(`${this.baseUrl}/emailavailable/${email}`).pipe(
       map(respuesta => respuesta.available)
     );
   }
 
   modificarPassword(formPass:any){
-    return this.http.put<any>(`${this.baseUrl}/modificarPassword`,formPass);
+    return this.http.put<any>(`${this.baseUrl}/updatepassword`,formPass);
   }
   
 }

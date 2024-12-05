@@ -1,1 +1,71 @@
-<p>register works!</p>
+<div class="container mt-4 row">
+
+    <div class="card col-12 col-md-8 col-lg-6 mx-auto">
+        <div class="card-body">
+
+            <h4 class="text-primary text-center">Registro de usuario</h4>
+
+            <form (ngSubmit)="registrar()" [formGroup]="formRegister">
+
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" formControlName="nombre" name="nombre" id="nombre" class="form-control" placeholder="Ingrese su nombre" required>
+                </div>
+                <div class="alert alert-danger" [hidden]="nombre.valid || (nombre.pristine && nombre.untouched)">
+                    El nombre es Obligatorio
+                </div>
+
+                <div class="mb-3">
+                    <label for="apellido" class="form-label">Apellido</label>
+                    <input type="text" formControlName="apellido" name="apellido" id="apellido" class="form-control" placeholder="Ingrese su apellido" required>
+                </div>
+                <div class="alert alert-danger" [hidden]="apellido.valid || (apellido.pristine && apellido.untouched)">
+                    El apellido es Obligatorio
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" formControlName="email" name="email" id="email" class="form-control" placeholder="Ingrese su email" required appCustomEmailAvailable>
+                </div>
+                <div class="alert alert-danger" [hidden]="email.valid || (email.pristine && email.untouched)">
+                    <span *ngIf="email.errors?.['required']">
+                        El email es obligatorio
+                    </span>
+                    <span *ngIf="email.errors?.['email']">
+                        El email debe ser valido
+                    </span>
+                    <span *ngIf="email.errors?.['emailTaken']">
+                        El email ingresado ya existe, por favor elija otro
+                    </span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="rol" class="form-label">Rol</label>
+                    <select formControlName="rol" name="rol" id="rol" class="form-select" required>
+                        <option value="admin">Admin</option>
+                        <option selected value="user">User</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" formControlName="password" name="password" id="password" class="form-control" placeholder="Ingrese su password" required>
+                </div>
+                <div class="alert alert-danger" [hidden]="password.valid || (password.pristine && password.untouched)">
+                    Es Obligatorio ingresar un password
+                </div>
+
+                <div class="mb-3 d-grid gap-2 mt-4">
+                    <button class="btn btn-outline-primary" type="submit" [disabled]="formRegister.invalid">
+                        Registrar
+                    </button>
+                </div>
+                
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+<app-modal-accion [modalAccion]="modalRegisterUser" (complete)="aceptar()"></app-modal-accion>
