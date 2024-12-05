@@ -1,7 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ModalAccionComponent } from 'src/app/shared/components/modal-accion/modal-accion.component';
 import { ModalCargaInicialComponent } from 'src/app/shared/components/modal-carga-inicial/modal-carga-inicial.component';
+import { ModalConsultaComponent } from 'src/app/shared/components/modal-consulta/modal-consulta.component';
 import { ModalInfoComponent } from 'src/app/shared/components/modal-info/modal-info.component';
+import { ModalConsulta } from 'src/app/shared/models/modal-consulta.model';
 import { ModalInfoModel } from 'src/app/shared/models/modal-info.model';
 import { ModalModel } from 'src/app/shared/models/modal.model';
 import { UserModel } from 'src/app/shared/models/users.model';
@@ -15,6 +17,8 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class UsersComponent implements OnInit, AfterViewInit{
 
   users:UserModel[] = [];
+  selectedUser!:UserModel;
+  action!:string;
 
   // acceder al componente hijo modalCargaInicial para usar sus metodos
   @ViewChild(ModalCargaInicialComponent) modalInicial!:ModalCargaInicialComponent;
@@ -24,6 +28,9 @@ export class UsersComponent implements OnInit, AfterViewInit{
 
   // accedo al componente hijo modalInfo
   @ViewChild(ModalInfoComponent) modalInfo!:ModalInfoComponent;
+
+  // accedo al componente hijo modalConsulta
+  @ViewChild(ModalConsultaComponent) modalConsul!:ModalConsultaComponent;
 
   // modelo de modal para eliminar un usuario
   modalDeleteUser:ModalModel = {
@@ -37,6 +44,12 @@ export class UsersComponent implements OnInit, AfterViewInit{
   modalInformacion:ModalInfoModel = {
     title:'',
     textoBodyModal:''
+  }
+
+  // modelo de modal de consulta de eliminacion de usuario
+  modalQueryDelete:ModalConsulta = {
+    title:'Eliminar Usuario',
+    textoBodyModal: '¿Está seguro que desea eliminar el usuario?'
   }
 
   ngOnInit(): void {
@@ -82,24 +95,11 @@ export class UsersComponent implements OnInit, AfterViewInit{
     if(currentUser!=user.email){
       // son distintos => puedo eliminar el usuario
       
-      // abrir modal
-      this.modalDeleteUser.textoBodyModal = 'Eliminando usuario...';
-      this.modalAccion.abrirModal();
-
-      // llamo al servicio
-      this.auth.deleteUser(user._id).subscribe(
-        response => {
-          if(response.message=='exito'){
-            this.modalDeleteUser.textoBodyModal = '¡Usuario eliminado con éxito!';
-            this.modalDeleteUser.hab_btn = true;
-            this.getUsers();
-          }
-          else{
-            this.modalDeleteUser.textoBodyModal = '¡Error al eliminar el usuario!';
-            this.modalDeleteUser.hab_btn = true;
-          }
-        }
-      );
+      /* primero consulto al usuario si quiere eliminar el usuario
+      mediante un modal de consulta => abrir modal de consulta*/
+      this.modalConsul.abrirModalConsulta();
+      this.selectedUser = user;
+      this.action='deleteUser';
     }
     else{
       // no se puede eliminar al usuario que hizo sesion => mostrar modal con esta info
@@ -112,17 +112,45 @@ export class UsersComponent implements OnInit, AfterViewInit{
     }
   }
 
+  eliminarUsuario(){
+    // abrir modal
+    this.modalDeleteUser.textoBodyModal = 'Eliminando usuario...';
+    this.modalAccion.abrirModal();
+
+    // llamo al servicio
+    this.auth.deleteUser(this.selectedUser._id).subscribe(
+      response => {
+        if(response.message=='exito'){
+          this.modalDeleteUser.textoBodyModal = '¡Usuario eliminado con éxito!';
+          this.modalDeleteUser.hab_btn = true;
+          this.getUsers();
+        }
+        else{
+          this.modalDeleteUser.textoBodyModal = '¡Error al eliminar el usuario!';
+          this.modalDeleteUser.hab_btn = true;
+        }
+      }
+    );
+  }
+
   aceptar(){
     // reiniciar variables de modal
     this.modalDeleteUser.hab_btn = false;
     this.modalDeleteUser.textoBodyModal = '';
   }
 
-  ok(){
+  okInfo(){
     // reiniciar variables del modal
     this.modalInformacion = {
       title: '',
       textoBodyModal: ''
+    }
+  }
+
+  okConsulta(){
+    if(this.action==='deleteUser'){
+      // eliminar usuario
+      this.eliminarUsuario();
     }
   }
 

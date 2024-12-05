@@ -56,4 +56,6 @@
 
 <app-modal-accion [modalAccion]="modalDeleteUser" (complete)="aceptar()"></app-modal-accion>
 
-<app-modal-info [modalInfo]="modalInformacion" (complete)="ok()"></app-modal-info>
+<app-modal-info [modalInfo]="modalInformacion" (complete)="okInfo()"></app-modal-info>
+
+<app-modal-consulta [modalQuery]="modalQueryDelete" (aceptar)="okConsulta()"></app-modal-consulta>

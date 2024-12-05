@@ -4,6 +4,7 @@ import { ModalAccionComponent } from './components/modal-accion/modal-accion.com
 import { ModalCargaInicialComponent } from './components/modal-carga-inicial/modal-carga-inicial.component';
 import { RouterModule } from '@angular/router';
 import { ModalInfoComponent } from './components/modal-info/modal-info.component';
+import { ModalConsultaComponent } from './components/modal-consulta/modal-consulta.component';
 
 
 
@@ -11,7 +12,8 @@ import { ModalInfoComponent } from './components/modal-info/modal-info.component
   declarations: [
     ModalAccionComponent,
     ModalCargaInicialComponent,
-    ModalInfoComponent
+    ModalInfoComponent,
+    ModalConsultaComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { ModalInfoComponent } from './components/modal-info/modal-info.component
   exports: [
     ModalAccionComponent,
     ModalCargaInicialComponent,
-    ModalInfoComponent
+    ModalInfoComponent,
+    ModalConsultaComponent
   ]
 })
 export class SharedModule { }
