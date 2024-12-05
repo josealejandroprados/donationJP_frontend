@@ -29,8 +29,9 @@
     </div>
 </header>
 
-<main class="container-fluid">
-    <section class="row" style="min-height: 600px;">
+<main #mainElement>
+    <!-- formato de la pantalla cuando la pantalla tenga un tamaño superior a 991px (pantalla grande) -->
+    <section class="row" style="min-height: 600px;" *ngIf="!pantallaChica; else pantallaSm">
         <!-- menu lateral -->
         <section class="col-3 col-md-2 col-lg-2 bg-dark">
             <app-nav-lateral></app-nav-lateral>
@@ -39,4 +40,11 @@
             <router-outlet></router-outlet>
         </section>
     </section>
+
+    <!-- formato de la pantalla cuando la pantalla tenga un tamaño inferior a 991px (pantalla pequeña)-->
+    <ng-template #pantallaSm>
+        <app-nav-lateral></app-nav-lateral>
+
+        <router-outlet></router-outlet>
+    </ng-template>
 </main>
