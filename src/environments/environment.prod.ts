@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    baseUrl: 'https://donation-jp-backend.vercel.app/'
+    baseUrl: 'https://donation-jp-backend.vercel.app'
 }
