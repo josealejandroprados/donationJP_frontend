@@ -52,6 +52,7 @@ export class LoginComponent {
           localStorage.setItem("token", resultado.token);
           localStorage.setItem("usuario", resultado.usuario);
           localStorage.setItem("rol", resultado.rol);
+          localStorage.setItem('_id', resultado.id)
         }
         else{
           // error al hacer login

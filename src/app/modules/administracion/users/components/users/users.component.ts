@@ -8,6 +8,9 @@ import { ModalInfoModel } from 'src/app/shared/models/modal-info.model';
 import { ModalModel } from 'src/app/shared/models/modal.model';
 import { UserModel } from 'src/app/shared/models/users.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import Popover from 'bootstrap/js/dist/popover';
+import * as $ from 'jquery';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -53,13 +56,16 @@ export class UsersComponent implements OnInit, AfterViewInit{
     textoBodyModal: '¿Está seguro que desea eliminar el usuario?'
   }
 
+  popoverInstance:Popover[]=[];
+
   ngOnInit(): void {
     // obtengo el rol del usuario que inicio sesión
     this.currentUser = localStorage.getItem('rol') || '';
   }
 
   constructor(
-    private auth:AuthService
+    private auth:AuthService,
+    private router:Router
   ){}
 
   ngAfterViewInit(): void {
@@ -67,6 +73,8 @@ export class UsersComponent implements OnInit, AfterViewInit{
     this.modalInicial.abrirModal();
 
     this.getUsers();
+
+    // this.addPopovers();
   }
 
   private getUsers(){
@@ -84,6 +92,9 @@ export class UsersComponent implements OnInit, AfterViewInit{
           console.log('error al obtener los usuarios');
         }
         this.modalInicial.cerrarModal();
+        setTimeout(() => {
+          this.addPopovers();
+        }, 50);
       }
     );
   }
@@ -154,6 +165,28 @@ export class UsersComponent implements OnInit, AfterViewInit{
       // eliminar usuario
       this.eliminarUsuario();
     }
+  }
+
+  editar(id:string){
+    // destruir popovers antes de redirigir a update
+    this.popoverInstance.forEach(elem => {
+      elem.dispose();
+    });
+
+    // redirigir a updateuser
+    this.router.navigate(['/admin/principal/updateuser',id]);
+  }
+
+  private addPopovers(){
+    // agrego los popovers a los botones que tengan el atributo data-bs-toggle="popover"
+    Array.from(document.querySelectorAll('[data-bs-toggle="popover"]')).forEach(
+      popoverNode => this.popoverInstance.push(
+        new Popover(popoverNode,{
+          trigger:'hover',
+          container:'body'
+        })
+      )
+    );
   }
 
 }

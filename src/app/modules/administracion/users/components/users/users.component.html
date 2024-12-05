@@ -27,14 +27,19 @@
                                 <td *ngIf="currentUser==='admin'">
                                     <div class="text-center mb-4 mt-3">
                                         <div class="btn-group btn-group-sm">
-                                            <a [routerLink]="['../updateuser',user._id]" class="btn btn-outline-primary">
+                                            <button (click)="editar(user._id)"
+                                                class="btn btn-outline-primary"
+                                                data-bs-toggle="popover"
+                                                data-bs-placement="top"
+                                                data-bs-content="Editar">
                                                 <i class="bi bi-pen"></i>
-                                            </a>
-                                            <button class="btn btn-outline-danger" (click)="deleteUser(user)">
-                                                <i class="bi bi-trash3"></i>
                                             </button>
-                                            <button class="btn btn-outline-success">
-                                                <i class="bi bi-key"></i>
+                                            <button class="btn btn-outline-danger"
+                                                (click)="deleteUser(user)"
+                                                data-bs-toggle="popover"
+                                                data-bs-placement="top"
+                                                data-bs-content="Eliminar">
+                                                <i class="bi bi-trash3"></i>
                                             </button>
                                         </div>
                                     </div>
