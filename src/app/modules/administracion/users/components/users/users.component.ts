@@ -19,6 +19,7 @@ export class UsersComponent implements OnInit, AfterViewInit{
   users:UserModel[] = [];
   selectedUser!:UserModel;
   action!:string;
+  currentUser!:string;
 
   // acceder al componente hijo modalCargaInicial para usar sus metodos
   @ViewChild(ModalCargaInicialComponent) modalInicial!:ModalCargaInicialComponent;
@@ -53,7 +54,8 @@ export class UsersComponent implements OnInit, AfterViewInit{
   }
 
   ngOnInit(): void {
-    // 
+    // obtengo el rol del usuario que inicio sesión
+    this.currentUser = localStorage.getItem('rol') || '';
   }
 
   constructor(

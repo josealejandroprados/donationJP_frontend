@@ -1,1 +1,67 @@
-<p>edit-user works!</p>
+<div class="container mt-4 row">
+
+    <div class="card col-12 col-md-9 col-lg-7 rounded mx-auto">
+        <div class="card-body">
+
+            <h5 class="text-primary text-center">Modificación de usuario</h5>
+
+            <form (ngSubmit)="modificar()" [formGroup]="formEdit">
+
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" formControlName="nombre" name="nombre" id="nombre" class="form-control" placeholder="Ingrese su nombre" required>
+                </div>
+                <div class="alert alert-danger" [hidden]="nombre.valid || (nombre.pristine && nombre.untouched)">
+                    El nombre es Obligatorio
+                </div>
+
+                <div class="mb-3">
+                    <label for="apellido" class="form-label">Apellido</label>
+                    <input type="text" formControlName="apellido" name="apellido" id="apellido" class="form-control" placeholder="Ingrese su apellido" required>
+                </div>
+                <div class="alert alert-danger" [hidden]="apellido.valid || (apellido.pristine && apellido.untouched)">
+                    El apellido es Obligatorio
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" formControlName="email" name="email" id="email" class="form-control" placeholder="Ingrese su email" required>
+                </div>
+                <div class="alert alert-danger" [hidden]="email.valid || (email.pristine && email.untouched)">
+                    <span *ngIf="email.errors?.['required']">
+                        El email es obligatorio
+                    </span>
+                    <span *ngIf="email.errors?.['email']">
+                        El email debe ser valido
+                    </span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="rol" class="form-label">Rol</label>
+                    <select formControlName="rol" name="rol" id="rol" class="form-select" required>
+                        <option value="admin">Admin</option>
+                        <option selected value="user">User</option>
+                    </select>
+                </div>
+
+                <div class="mb-3 d-grid gap-2">
+                    <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary" type="submit" [disabled]="formEdit.invalid">
+                            Modificar
+                        </button>
+                        <a routerLink="../../users" class="btn btn-outline-danger">
+                            Cancelar
+                        </a>
+                    </div>
+                </div>
+                
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+
+<app-modal-carga-inicial></app-modal-carga-inicial>
+<app-modal-accion [modalAccion]="modalUpdateUser" (complete)="aceptar()"></app-modal-accion>
