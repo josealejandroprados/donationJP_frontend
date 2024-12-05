@@ -54,4 +54,6 @@
 
 <app-modal-carga-inicial></app-modal-carga-inicial>
 
-<app-modal-accion [modalAccion]="modalDeleteUser"></app-modal-accion>
+<app-modal-accion [modalAccion]="modalDeleteUser" (complete)="aceptar()"></app-modal-accion>
+
+<app-modal-info [modalInfo]="modalInformacion" (complete)="ok()"></app-modal-info>
