@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import Popover from 'bootstrap/js/dist/popover';
 import { ModalAccionComponent } from 'src/app/shared/components/modal-accion/modal-accion.component';
 import { ModalCargaInicialComponent } from 'src/app/shared/components/modal-carga-inicial/modal-carga-inicial.component';
 import { ModalConsultaComponent } from 'src/app/shared/components/modal-consulta/modal-consulta.component';
@@ -42,6 +43,9 @@ export class DonationComponent implements OnInit, AfterViewInit{
     textoBodyModal: '¿Está seguro que desea eliminar este registro?'
   }
 
+  // pagination
+  num_pag:number=1;
+
   ngOnInit(): void {
     // obtengo el rol del usuario actual
     this.currentUserRol = localStorage.getItem('rol') || '';
@@ -57,6 +61,8 @@ export class DonationComponent implements OnInit, AfterViewInit{
 
     // obtener donaciones
     this.getDonations();
+
+    this.addPopovers();
   }
 
   private getDonations(){
@@ -115,5 +121,29 @@ export class DonationComponent implements OnInit, AfterViewInit{
       this.modalDeleteDonation.hab_btn = false;
     }
     // 
+  }
+
+  reloadDonations(){
+    this.modalInicial.abrirModal();
+
+    this.getDonations();
+  }
+
+  private addPopovers(){
+    // agrego los popovers a los botones que tengan el atributo data-bs-toggle="popover"
+    Array.from(document.querySelectorAll('[data-bs-toggle="popover"]')).forEach(
+      popoverNode => new Popover(popoverNode,{
+          trigger:'hover',
+          container:'body'
+      })
+    )
+  }
+
+  // metodo para cambiar de página
+  onPageChange(pageNumber:number){
+    this.num_pag = pageNumber;
+
+    // desplazo la vista hacia el div que está justo antes de la tabla
+    // this.tituloListaDibujos.nativeElement.scrollIntoView({ behavior: 'smooth' });
   }
 }

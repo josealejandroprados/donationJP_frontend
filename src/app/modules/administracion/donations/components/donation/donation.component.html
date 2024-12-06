@@ -5,7 +5,17 @@
         <div class="card col-11 col-md-10 col-lg-9 mx-auto">
             <div class="card-body">
 
-                <h3 class="text-primary text-center">Lista de donaciones</h3>
+                <h3 class="text-primary text-center mb-4">Lista de donaciones</h3>
+
+                <div class="text-end mb-4">
+                    <button class="btn btn-outline-primary"
+                            (click)="reloadDonations()"
+                            data-bs-toggle="popover"
+                            data-bs-placement="top"
+                            data-bs-content="Recargar">
+                        <i class="bi bi-arrow-repeat"></i>
+                    </button>
+                </div>
 
                 <div class="table-responsive">
                     <table class="table table-hover">
@@ -19,7 +29,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let donat of donations; let i = index">
+                            <tr *ngFor="let donat of donations | paginate: { itemsPerPage: 10, currentPage: num_pag }; let i = index">
                                 <td>{{i}}</td>
                                 <td>{{donat.donorName}}</td>
                                 <td>{{donat.payment_method.id}}</td>
@@ -41,6 +51,11 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <pagination-controls class="my-pagination" (pageChange)="onPageChange($event)" previousLabel="Anterior" nextLabel="Siguiente">
+                    </pagination-controls>
                 </div>
 
             </div>

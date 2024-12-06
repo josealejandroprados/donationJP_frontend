@@ -7,6 +7,7 @@ import { UsersComponent } from './components/users/users.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from "../../../shared/shared.module";
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { SharedModule } from "../../../shared/shared.module";
     CommonModule,
     UsersRoutingModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    NgxPaginationModule
 ]
 })
 export class UsersModule { }

@@ -58,6 +58,9 @@ export class UsersComponent implements OnInit, AfterViewInit{
 
   popoverInstance:Popover[]=[];
 
+  // pagination
+  num_pag:number=1;
+
   ngOnInit(): void {
     // obtengo el rol del usuario que inicio sesión
     this.currentUser = localStorage.getItem('rol') || '';
@@ -187,6 +190,20 @@ export class UsersComponent implements OnInit, AfterViewInit{
         })
       )
     );
+  }
+
+  reloadDonations(){
+    this.modalInicial.abrirModal();
+    
+    this.getUsers();
+  }
+
+  // metodo para cambiar de página
+  onPageChange(pageNumber:number){
+    this.num_pag = pageNumber;
+
+    // desplazo la vista hacia el div que está justo antes de la tabla
+    // this.tituloListaDibujos.nativeElement.scrollIntoView({ behavior: 'smooth' });
   }
 
 }

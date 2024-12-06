@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DonationsRoutingModule } from './donations-routing.module';
 import { DonationComponent } from './components/donation/donation.component';
 import { SharedModule } from "../../../shared/shared.module";
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { SharedModule } from "../../../shared/shared.module";
   imports: [
     CommonModule,
     DonationsRoutingModule,
-    SharedModule
+    SharedModule,
+    NgxPaginationModule
 ]
 })
 export class DonationsModule { }
